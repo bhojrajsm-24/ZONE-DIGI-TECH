@@ -7,11 +7,13 @@ import About from './pages/About';
 import Services from './pages/Services';
 import Projects from './pages/Projects';
 import Contact from './pages/Contact';
+import Preloader from './components/Preloader';
 
 type Page = 'home' | 'about' | 'services' | 'projects' | 'contact';
 
 function AppContent() {
   const [currentPage, setCurrentPage] = useState<Page>('home');
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const pageData: Record<Page, { title: string; desc: string }> = {
@@ -51,6 +53,8 @@ function AppContent() {
 
   return (
     <div className="min-h-screen flex flex-col bg-stone-50 dark:bg-[#0a0a0f] transition-colors duration-300">
+      {loading && <Preloader onLoadingComplete={() => setLoading(false)} />}
+      
       <Navbar currentPage={currentPage} onNavigate={navigate} />
       <main className="flex-1">
         {renderPage()}
