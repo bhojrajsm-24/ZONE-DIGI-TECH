@@ -5,6 +5,7 @@ import {
 } from 'lucide-react';
 import { useScrollAnimation } from '../hooks/UseScrollAnimation';
 
+
 const services = [
   'UI/UX Design', 'Static Website', 'Dynamic Website', 'E-Commerce',
   'Social Media', 'SEO Optimization', 'Video Editing', 'Photo Editing',

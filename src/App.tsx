@@ -14,14 +14,24 @@ function AppContent() {
   const [currentPage, setCurrentPage] = useState<Page>('home');
 
   useEffect(() => {
-    const pageTitles: Record<Page, string> = {
-      home: 'KiranDigital — Creative Digital Studio',
-      about: 'About Us — KiranDigital',
-      services: 'Services — KiranDigital',
-      projects: 'Projects — KiranDigital',
-      contact: 'Contact Us — KiranDigital',
+    const pageData: Record<Page, { title: string; desc: string }> = {
+      home: { title: 'KiranDigital — Creative Digital Studio', desc: 'A premium creative digital agency helping Indian startups and businesses build powerful digital presences.' },
+      about: { title: 'About Us — KiranDigital', desc: 'Learn more about KiranDigital, our mission, values, and the creative team behind our digital solutions.' },
+      services: { title: 'Services — KiranDigital', desc: 'Explore our comprehensive digital services including UI/UX Design, Web Development, SEO, and Social Media.' },
+      projects: { title: 'Projects — KiranDigital', desc: 'View our portfolio of featured projects across web design, e-commerce, branding, and digital marketing.' },
+      contact: { title: 'Contact Us — KiranDigital', desc: 'Get in touch with KiranDigital to discuss your next big digital project. We would love to hear from you.' },
     };
-    document.title = pageTitles[currentPage];
+    
+    document.title = pageData[currentPage].title;
+    
+    // Update meta description
+    let metaDesc = document.querySelector('meta[name="description"]');
+    if (!metaDesc) {
+      metaDesc = document.createElement('meta');
+      metaDesc.setAttribute('name', 'description');
+      document.head.appendChild(metaDesc);
+    }
+    metaDesc.setAttribute('content', pageData[currentPage].desc);
   }, [currentPage]);
 
   const navigate = (page: string) => {
